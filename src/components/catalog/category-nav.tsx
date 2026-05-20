@@ -15,7 +15,6 @@ export function CategoryNav({ activeCategory, onCategoryChange }: CategoryNavPro
   const handleClick = (categoryId: string) => {
     onCategoryChange(categoryId);
 
-    // Smooth scroll the clicked pill into view
     if (scrollRef.current) {
       const buttonEl = scrollRef.current.querySelector(
         `[data-category="${categoryId}"]`
@@ -32,7 +31,7 @@ export function CategoryNav({ activeCategory, onCategoryChange }: CategoryNavPro
 
   return (
     <nav
-      className="glass sticky top-16 z-40 border-b border-border/50"
+      className="glass sticky top-16 z-40 border-b border-border/40"
       aria-label="Categorias de produtos"
     >
       <div
@@ -49,10 +48,10 @@ export function CategoryNav({ activeCategory, onCategoryChange }: CategoryNavPro
               onClick={() => handleClick(category.id)}
               aria-pressed={isActive}
               className={cn(
-                'flex shrink-0 items-center gap-1.5 rounded-full border px-4 py-2 font-mono text-sm transition-all duration-300',
+                'flex shrink-0 items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200',
                 isActive
-                  ? 'border-acai bg-acai text-white glow-acai-sm shadow-[0_0_12px_rgba(124,58,237,0.3)]'
-                  : 'border-border/40 bg-transparent text-muted-foreground hover:border-acai/40 hover:text-foreground'
+                  ? 'border-acai bg-acai text-white shadow-organic'
+                  : 'border-border/60 bg-transparent text-muted-foreground hover:border-acai/30 hover:text-foreground hover:bg-acai/5'
               )}
             >
               <span className="text-base" role="img" aria-hidden="true">

@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { useBuilderStore } from '@/store/builder-store';
 import { useCartStore } from '@/store/cart-store';
 import type { Product } from '@/types';
-import { ShoppingCart, Settings2 } from 'lucide-react';
+import { ShoppingCart, Palette } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -16,10 +16,10 @@ interface ProductCardProps {
 
 /** Emoji fallback map by category */
 const categoryEmoji: Record<Product['category'], string> = {
-  combos: '⚡',
+  combos: '🌴',
   custom: '🫐',
   gelados: '🍨',
-  bebidas: '🥤',
+  bebidas: '🥥',
 };
 
 export function ProductCard({ product }: ProductCardProps) {
@@ -44,17 +44,17 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Card
-      className="neon-border group relative flex flex-col overflow-hidden bg-surface/80 py-0 transition-all duration-300 hover:scale-[1.02] hover:bg-surface"
+      className="organic-border group relative flex flex-col overflow-hidden bg-card py-0 transition-all duration-300 hover:shadow-organic-lg hover:-translate-y-0.5"
     >
       {/* Image section */}
-      <div className="relative flex h-44 items-center justify-center overflow-hidden rounded-t-xl bg-gradient-to-br from-acai to-acai-glow">
+      <div className="relative flex h-44 items-center justify-center overflow-hidden rounded-t-xl bg-gradient-to-br from-acai/20 to-ocean/10">
         {!imgError ? (
           <Image
             src={product.image_url}
             alt={product.name}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
             onError={() => setImgError(true)}
             priority={false}
           />
@@ -64,17 +64,27 @@ export function ProductCard({ product }: ProductCardProps) {
           </span>
         )}
 
-        {/* Overlay gradient for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        {/* Subtle overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
 
         {/* Customizable badge */}
         {product.is_customizable && (
           <Badge
             variant="outline"
-            className="absolute right-2 top-2 z-10 border-neon-mint/40 bg-surface/60 font-mono text-neon-mint backdrop-blur-sm"
+            className="absolute right-2 top-2 z-10 border-ocean/40 bg-card/80 text-ocean backdrop-blur-sm"
           >
-            <Settings2 className="mr-1 size-3" />
+            <Palette className="mr-1 size-3" />
             Customizável
+          </Badge>
+        )}
+
+        {/* Popular tag */}
+        {product.tags?.includes('popular') && (
+          <Badge
+            variant="outline"
+            className="absolute left-2 top-2 z-10 border-sand/40 bg-card/80 text-sand backdrop-blur-sm"
+          >
+            ★ Popular
           </Badge>
         )}
       </div>
@@ -82,7 +92,7 @@ export function ProductCard({ product }: ProductCardProps) {
       {/* Card body */}
       <div className="flex flex-1 flex-col gap-3 p-4">
         {/* Product name */}
-        <h3 className="text-base font-bold leading-tight text-white">
+        <h3 className="text-base font-bold leading-tight text-foreground">
           {product.name}
         </h3>
 
@@ -91,13 +101,13 @@ export function ProductCard({ product }: ProductCardProps) {
           {product.description}
         </p>
 
-        {/* Price & SKU */}
+        {/* Price */}
         <div className="mt-auto flex items-end justify-between pt-2">
           <div>
-            <p className="font-mono text-lg font-semibold text-acai">
+            <p className="text-lg font-semibold text-acai">
               A partir de {product.base_price.toFixed(2)}&euro;
             </p>
-            <p className="font-mono text-[10px] text-muted-foreground/60">
+            <p className="text-[10px] text-muted-foreground/60">
               SKU: {product.sku}
             </p>
           </div>
@@ -107,16 +117,16 @@ export function ProductCard({ product }: ProductCardProps) {
         {product.is_customizable ? (
           <Button
             onClick={handleCustomize}
-            className="w-full border border-neon-mint/40 bg-neon-mint/15 font-mono text-neon-mint transition-all duration-300 hover:bg-neon-mint/25 hover:shadow-[0_0_12px_rgba(52,211,153,0.25)]"
+            className="w-full border border-ocean/30 bg-ocean/10 text-ocean transition-all duration-200 hover:bg-ocean/20 hover:shadow-organic"
             size="sm"
           >
-            <Settings2 className="size-4" />
+            <Palette className="size-4" />
             Customizar
           </Button>
         ) : (
           <Button
             onClick={handleAddDirectly}
-            className="w-full border border-acai/40 bg-acai/15 font-mono text-acai transition-all duration-300 hover:bg-acai/25 hover:shadow-[0_0_12px_rgba(124,58,237,0.25)]"
+            className="w-full border border-acai/30 bg-acai/10 text-acai transition-all duration-200 hover:bg-acai/20 hover:shadow-organic"
             size="sm"
           >
             <ShoppingCart className="size-4" />

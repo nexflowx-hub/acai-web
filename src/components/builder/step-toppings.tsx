@@ -53,17 +53,10 @@ export function StepToppings() {
     setToppingQuantity(modifier, FREE_ALLOWANCE, MAX_TOTAL);
   };
 
-  // Calculate the cost for a given unit index (1-based)
-  // Units 1..FREE_ALLOWANCE are free, after that each costs EXTRA_PRICE
-  const getUnitExtraCost = (unitIndex: number) => {
-    if (unitIndex <= FREE_ALLOWANCE) return 0;
-    return EXTRA_PRICE;
-  };
-
-  // For a specific topping, what's the extra cost of the next unit?
   const getNextUnitCost = (optionId: string) => {
     const currentQty = getQuantity(optionId);
-    return getUnitExtraCost(currentQty + 1);
+    if (currentQty + 1 <= FREE_ALLOWANCE) return 0;
+    return EXTRA_PRICE;
   };
 
   return (
@@ -75,14 +68,14 @@ export function StepToppings() {
         <div className="flex items-center gap-2">
           <Badge
             variant="outline"
-            className="border-neon-mint/30 bg-neon-mint/10 text-neon-mint"
+            className="border-forest/30 bg-forest/10 text-forest"
           >
             {FREE_ALLOWANCE} grátis
           </Badge>
           {extraUnits > 0 && (
             <Badge
               variant="outline"
-              className="border-neon-pink/30 bg-neon-pink/10 text-neon-pink"
+              className="border-coral/30 bg-coral/10 text-coral"
             >
               +{extraUnits} extra
             </Badge>
@@ -93,7 +86,7 @@ export function StepToppings() {
       {freeRemaining > 0 && (
         <p className="text-xs text-muted-foreground">
           Ainda pode adicionar{' '}
-          <span className="font-medium text-neon-mint">{freeRemaining}</span>{' '}
+          <span className="font-medium text-forest">{freeRemaining}</span>{' '}
           {freeRemaining === 1 ? 'topping gratuito' : 'toppings gratuitos'}
         </p>
       )}
@@ -110,8 +103,8 @@ export function StepToppings() {
               className={cn(
                 'flex items-center justify-between rounded-xl border px-4 py-3 transition-colors',
                 isActive
-                  ? 'border-acai/30 bg-acai/5'
-                  : 'border-border bg-surface-light hover:border-acai/20'
+                  ? 'border-acai/20 bg-acai/5'
+                  : 'border-border bg-card hover:border-acai/15'
               )}
             >
               <div className="flex flex-col gap-0.5">
@@ -124,7 +117,7 @@ export function StepToppings() {
                   {option.name}
                 </span>
                 {isActive && nextCost > 0 && (
-                  <span className="font-mono text-xs text-neon-pink">
+                  <span className="text-xs text-coral">
                     +{nextCost.toFixed(2)}&euro; / unidade extra
                   </span>
                 )}
@@ -138,7 +131,7 @@ export function StepToppings() {
                   className={cn(
                     'flex size-8 items-center justify-center rounded-full border transition-colors',
                     qty > 0
-                      ? 'border-acai/50 text-acai hover:bg-acai/10'
+                      ? 'border-acai/30 text-acai hover:bg-acai/5'
                       : 'cursor-not-allowed border-border text-muted-foreground/40'
                   )}
                 >
@@ -147,7 +140,7 @@ export function StepToppings() {
 
                 <span
                   className={cn(
-                    'w-8 text-center font-mono text-sm font-medium',
+                    'w-8 text-center text-sm font-medium tabular-nums',
                     isActive ? 'text-acai' : 'text-muted-foreground'
                   )}
                 >
@@ -162,7 +155,7 @@ export function StepToppings() {
                     'flex size-8 items-center justify-center rounded-full border transition-colors',
                     totalUnits >= MAX_TOTAL
                       ? 'cursor-not-allowed border-border text-muted-foreground/40'
-                      : 'border-acai/50 text-acai hover:bg-acai/10'
+                      : 'border-acai/30 text-acai hover:bg-acai/5'
                   )}
                 >
                   <Plus className="size-3.5" />

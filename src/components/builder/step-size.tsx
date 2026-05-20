@@ -45,8 +45,8 @@ export function StepSize() {
               className={cn(
                 'relative flex w-full items-center justify-between rounded-xl border px-4 py-3.5 text-left transition-colors',
                 isSelected
-                  ? 'border-acai bg-acai/10 glow-acai-sm'
-                  : 'border-border bg-surface-light hover:border-acai/40 hover:bg-acai/5'
+                  ? 'border-acai bg-acai/5 shadow-organic'
+                  : 'border-border bg-card hover:border-acai/30 hover:bg-acai/5'
               )}
             >
               <div className="flex items-center gap-3">
@@ -55,7 +55,7 @@ export function StepSize() {
                     'flex size-6 items-center justify-center rounded-full border-2 transition-colors',
                     isSelected
                       ? 'border-acai bg-acai text-white'
-                      : 'border-muted-foreground/40'
+                      : 'border-muted-foreground/30'
                   )}
                 >
                   {isSelected && <Check className="size-3.5" />}
@@ -72,9 +72,9 @@ export function StepSize() {
               {option.additional_cost > 0 && (
                 <span
                   className={cn(
-                    'font-mono text-sm',
+                    'text-sm font-medium',
                     isSelected
-                      ? 'text-acai text-glow-acai'
+                      ? 'text-acai'
                       : 'text-muted-foreground'
                   )}
                 >

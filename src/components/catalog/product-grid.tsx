@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { products } from '@/data/mockData';
 import { ProductCard } from '@/components/catalog/product-card';
-import { PackageOpen } from 'lucide-react';
+import { Leaf } from 'lucide-react';
 
 interface ProductGridProps {
   activeCategory: string;
@@ -52,11 +52,11 @@ export function ProductGrid({ activeCategory }: ProductGridProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="flex size-16 items-center justify-center rounded-full bg-surface-light">
-              <PackageOpen className="size-8 text-muted-foreground/50" />
+            <div className="flex size-16 items-center justify-center rounded-full bg-muted">
+              <Leaf className="size-8 text-muted-foreground/50" />
             </div>
             <div>
-              <p className="font-semibold text-white">
+              <p className="font-semibold text-foreground">
                 Sem produtos disponíveis
               </p>
               <p className="mt-1 text-sm text-muted-foreground">

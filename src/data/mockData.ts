@@ -1,5 +1,6 @@
 // ============================================================
-// AÇAÍ CONCEPT — Mock Data (Simulates Relational DB)
+// AÇAÍ DA TERRA — Mock Data (Atlas API Fallback)
+// Das Florestas Brasileiras às Praias Portuguesas
 // ============================================================
 
 import type {
@@ -13,13 +14,13 @@ import type {
 // ── Categories ──────────────────────────────────────────────
 
 export const categories: Category[] = [
-  { id: "combos", label: "Combos Prontos", emoji: "⚡" },
-  { id: "custom", label: "Crie o Seu Açaí", emoji: "🫐" },
-  { id: "gelados", label: "Gelados Artesanais", emoji: "🍨" },
-  { id: "bebidas", label: "Bebidas", emoji: "🥤" },
+  { id: "combos", label: "Combos", emoji: "🌴" },
+  { id: "custom", label: "Crie o Seu", emoji: "🫐" },
+  { id: "gelados", label: "Gelados", emoji: "🍨" },
+  { id: "bebidas", label: "Bebidas", emoji: "🥥" },
 ];
 
-// ── Time Slots (simulated) ─────────────────────────────────
+// ── Time Slots ──────────────────────────────────────────────
 
 export const timeSlots: TimeSlot[] = [
   { id: "asap", label: "O mais rápido possível", estimated_minutes: "30-45 min" },
@@ -34,7 +35,7 @@ export const timeSlots: TimeSlot[] = [
 // ── Products ────────────────────────────────────────────────
 
 export const products: Product[] = [
-  // ─ Combos Prontos ─
+  // ─ Combos ─
   {
     id: "combo-tropical",
     name: "Açaí Tropical Bowl",
@@ -44,6 +45,7 @@ export const products: Product[] = [
     image_url: "/images/combo-tropical.jpg",
     sku: "CMB-TRP-001",
     is_customizable: false,
+    tags: ["tropical", "popular"],
   },
   {
     id: "combo-protein",
@@ -54,6 +56,7 @@ export const products: Product[] = [
     image_url: "/images/combo-protein.jpg",
     sku: "CMB-PRT-002",
     is_customizable: false,
+    tags: ["proteína", "fitness"],
   },
   {
     id: "combo-berry",
@@ -64,6 +67,7 @@ export const products: Product[] = [
     image_url: "/images/combo-berry.jpg",
     sku: "CMB-BRY-003",
     is_customizable: false,
+    tags: ["frutos vermelhos"],
   },
   {
     id: "combo-green",
@@ -74,6 +78,7 @@ export const products: Product[] = [
     image_url: "/images/combo-green.jpg",
     sku: "CMB-GRN-004",
     is_customizable: false,
+    tags: ["detox", "verde"],
   },
 
   // ─ Crie o Seu Açaí ─
@@ -86,6 +91,7 @@ export const products: Product[] = [
     image_url: "/images/custom-acai.jpg",
     sku: "CST-ACI-001",
     is_customizable: true,
+    tags: ["personalizável"],
   },
 
   // ─ Gelados Artesanais ─
@@ -98,6 +104,7 @@ export const products: Product[] = [
     image_url: "/images/gelado-mango.jpg",
     sku: "GLD-MNG-001",
     is_customizable: false,
+    tags: ["manga", "tropical"],
   },
   {
     id: "gelado-coco",
@@ -108,6 +115,7 @@ export const products: Product[] = [
     image_url: "/images/gelado-coco.jpg",
     sku: "GLD-CCO-002",
     is_customizable: false,
+    tags: ["coco", "caramelo"],
   },
   {
     id: "gelado-pistache",
@@ -118,6 +126,7 @@ export const products: Product[] = [
     image_url: "/images/gelado-pistache.jpg",
     sku: "GLD-PST-003",
     is_customizable: false,
+    tags: ["pistache", "premium"],
   },
   {
     id: "gelado-maracuja",
@@ -128,6 +137,7 @@ export const products: Product[] = [
     image_url: "/images/gelado-maracuja.jpg",
     sku: "GLD-MRC-004",
     is_customizable: false,
+    tags: ["maracujá", "ácido"],
   },
 
   // ─ Bebidas ─
@@ -140,6 +150,7 @@ export const products: Product[] = [
     image_url: "/images/bebida-smoothie.jpg",
     sku: "BEB-SMT-001",
     is_customizable: false,
+    tags: ["smoothie", "energia"],
   },
   {
     id: "bebida-detox",
@@ -150,6 +161,7 @@ export const products: Product[] = [
     image_url: "/images/bebida-detox.jpg",
     sku: "BEB-DTX-002",
     is_customizable: false,
+    tags: ["detox", "verde"],
   },
   {
     id: "bebida-coco",
@@ -160,6 +172,7 @@ export const products: Product[] = [
     image_url: "/images/bebida-coco.jpg",
     sku: "BEB-CCO-003",
     is_customizable: false,
+    tags: ["coco", "natural"],
   },
 ];
 

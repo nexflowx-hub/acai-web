@@ -26,7 +26,6 @@ export function BuilderFooter() {
   const handleAddToCart = () => {
     if (!product || !hasSize) return;
 
-    // Assemble all selected modifiers
     const modifiers = [
       selections.step1_size!,
       ...selections.step2_creams,
@@ -47,7 +46,7 @@ export function BuilderFooter() {
   };
 
   return (
-    <div className="glass-strong border-t border-acai/20 px-4 py-4">
+    <div className="border-t border-border/60 bg-card px-4 py-4">
       <div className="flex items-center justify-between gap-4">
         <div className="flex flex-col">
           <span className="text-xs text-muted-foreground">Total</span>
@@ -58,7 +57,7 @@ export function BuilderFooter() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -10, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="font-mono text-2xl font-bold text-acai text-glow-acai animate-pulse-glow"
+              className="text-2xl font-bold text-acai"
             >
               {totalPrice.toFixed(2)}&euro;
             </motion.span>
@@ -71,13 +70,13 @@ export function BuilderFooter() {
           className={cn(
             'gap-2 rounded-xl px-6 font-semibold transition-all',
             hasSize
-              ? 'bg-neon-mint text-black hover:bg-neon-mint/90 glow-mint'
+              ? 'bg-ocean text-white hover:bg-ocean/90 shadow-organic'
               : 'bg-muted text-muted-foreground'
           )}
           size="lg"
         >
           <ShoppingCart className="size-4" />
-          Adicionar 1 Item ao Carrinho
+          Adicionar ao Carrinho
         </Button>
       </div>
     </div>

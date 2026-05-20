@@ -34,7 +34,6 @@ export function AcaiBuilder() {
   const prevStep = useBuilderStore((s) => s.prevStep);
   const selections = useBuilderStore((s) => s.selections);
 
-  // Step 1 requires a size selection to proceed
   const canProceed = currentStep === 1 ? selections.step1_size !== null : true;
 
   const renderStep = () => {
@@ -54,15 +53,15 @@ export function AcaiBuilder() {
     <Sheet open={isOpen} onOpenChange={(open) => !open && close()}>
       <SheetContent
         side="right"
-        className="flex w-full flex-col gap-0 bg-surface p-0 sm:max-w-lg"
+        className="flex w-full flex-col gap-0 bg-card p-0 sm:max-w-lg"
       >
         {/* Header */}
-        <SheetHeader className="border-b border-acai/15 px-4 pb-4 pt-5">
+        <SheetHeader className="border-b border-border/60 px-4 pb-4 pt-5">
           <div className="flex items-center justify-between">
             <SheetTitle className="text-lg font-bold text-foreground">
-              Crie o Seu Açaí
+              🫐 Crie o Seu Açaí
             </SheetTitle>
-            <span className="font-mono text-xs text-muted-foreground">
+            <span className="text-xs text-muted-foreground">
               Passo {currentStep}/4
             </span>
           </div>
@@ -74,7 +73,6 @@ export function AcaiBuilder() {
                 key={step}
                 type="button"
                 onClick={() => {
-                  // Only allow going back to completed steps or current
                   if (step <= currentStep) {
                     useBuilderStore.getState().setStep(step);
                   }
@@ -85,9 +83,9 @@ export function AcaiBuilder() {
                   className={cn(
                     'size-2.5 rounded-full transition-all duration-300',
                     step === currentStep
-                      ? 'bg-acai glow-acai-sm scale-125'
+                      ? 'bg-acai scale-125'
                       : step < currentStep
-                        ? 'bg-acai/50'
+                        ? 'bg-acai/40'
                         : 'bg-muted-foreground/20'
                   )}
                 />
@@ -115,7 +113,7 @@ export function AcaiBuilder() {
         </div>
 
         {/* Navigation + Footer */}
-        <div className="flex flex-col gap-0 border-t border-acai/15">
+        <div className="flex flex-col gap-0 border-t border-border/60">
           {/* Step navigation */}
           <div className="flex items-center justify-between px-4 py-3">
             <Button
@@ -143,7 +141,7 @@ export function AcaiBuilder() {
                     step === currentStep
                       ? 'w-6 bg-acai'
                       : step < currentStep
-                        ? 'w-3 bg-acai/40'
+                        ? 'w-3 bg-acai/30'
                         : 'w-3 bg-muted-foreground/20'
                   )}
                 />
@@ -159,7 +157,7 @@ export function AcaiBuilder() {
                 'gap-1 text-sm',
                 currentStep === 4 || !canProceed
                   ? 'text-muted-foreground/30'
-                  : 'text-acai hover:text-acai-glow'
+                  : 'text-acai hover:text-acai/80'
               )}
             >
               Seguinte

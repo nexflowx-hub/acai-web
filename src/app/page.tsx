@@ -8,16 +8,15 @@ import { ProductGrid } from '@/components/catalog/product-grid';
 import { AcaiBuilder } from '@/components/builder/acai-builder';
 import { useLocationStore } from '@/store/location-store';
 import { motion } from 'framer-motion';
+import { Palmtree, Waves } from 'lucide-react';
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState('combos');
   const [geoModalOpen, setGeoModalOpen] = useState(false);
   const isVerified = useLocationStore((s) => s.isVerified);
 
-  // Open geofencing modal automatically if not verified
   useEffect(() => {
     if (!isVerified) {
-      // Small delay to let the page render first
       const timer = setTimeout(() => setGeoModalOpen(true), 600);
       return () => clearTimeout(timer);
     }
@@ -41,11 +40,12 @@ export default function Home() {
       </div>
 
       {/* ── Hero Banner ─────────────────────────────────────── */}
-      <section className="relative overflow-hidden px-4 py-8 sm:px-6 sm:py-12">
-        {/* Animated background glow */}
+      <section className="relative overflow-hidden px-4 py-12 sm:px-6 sm:py-16">
+        {/* Organic background blobs */}
         <div className="absolute inset-0 -z-10">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-acai/5 blur-[120px]" />
-          <div className="absolute top-1/4 right-0 w-[300px] h-[300px] rounded-full bg-neon-pink/3 blur-[80px]" />
+          <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-acai/5 blur-[120px]" />
+          <div className="absolute top-1/3 right-0 w-[400px] h-[400px] rounded-full bg-ocean/5 blur-[100px]" />
+          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full bg-sand/5 blur-[80px]" />
         </div>
 
         <motion.div
@@ -54,20 +54,32 @@ export default function Home() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mx-auto max-w-7xl text-center"
         >
-          <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-            <span className="text-glow-acai text-acai">Açaí</span>{' '}
-            <span className="text-foreground">de Alta Performance</span>
+          {/* Tagline */}
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-acai/20 bg-acai/5 px-4 py-1.5">
+            <Palmtree className="size-4 text-forest" />
+            <span className="text-xs font-medium text-foreground">
+              Da Amazónia para o Atlântico
+            </span>
+            <Waves className="size-4 text-ocean" />
+          </div>
+
+          <h1 className="text-3xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+            <span className="text-acai">Açaí da Terra</span>
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-base text-muted-foreground sm:text-lg">
-            Gelados artesanais conceptuais com ingredientes premium.
-            Personalize o seu açaí dos sonhos.
+          <p className="mx-auto mt-3 max-w-lg text-base text-muted-foreground sm:text-lg">
+            Das florestas brasileiras até às praias portuguesas —
+            açaí artesanal, natural e feito com alma.
           </p>
 
-          {/* Neon divider */}
+          {/* Organic divider */}
           <div className="mx-auto mt-6 flex items-center justify-center gap-3">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-acai/50" />
-            <div className="size-2 rounded-full bg-acai glow-acai-sm" />
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-acai/50" />
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-acai/30" />
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm">🌿</span>
+              <span className="text-sm">🌊</span>
+              <span className="text-sm">🫐</span>
+            </div>
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-ocean/30" />
           </div>
         </motion.div>
       </section>
@@ -78,24 +90,24 @@ export default function Home() {
       </main>
 
       {/* ── Footer ──────────────────────────────────────────── */}
-      <footer className="mt-auto border-t border-acai/10 bg-surface/50">
+      <footer className="mt-auto border-t border-border/60 bg-muted/30">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
-            <div className="flex items-baseline gap-1.5">
-              <span className="text-glow-acai text-sm font-extrabold tracking-wider text-acai">
-                AÇAÍ
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-bold text-acai">
+                Açaí da Terra
               </span>
-              <span className="font-mono text-[10px] tracking-widest text-muted-foreground">
-                CONCEPT
+              <span className="text-xs text-muted-foreground">
+                🌿 Das florestas às praias
               </span>
             </div>
-            <p className="font-mono text-[10px] text-muted-foreground/50">
-              © {new Date().getFullYear()} Açaí Concept — Todos os direitos reservados
+            <p className="text-xs text-muted-foreground">
+              © {new Date().getFullYear()} Açaí da Terra — Todos os direitos reservados
             </p>
-            <div className="flex items-center gap-1">
-              <span className="size-1.5 rounded-full bg-neon-mint/40" />
-              <span className="font-mono text-[10px] text-muted-foreground/50">
-                SYSTEM ONLINE
+            <div className="flex items-center gap-1.5">
+              <span className="size-1.5 rounded-full bg-forest/60" />
+              <span className="text-[10px] text-muted-foreground">
+                Feito com amor em Portugal
               </span>
             </div>
           </div>

@@ -41,7 +41,7 @@ export function StepCreams() {
         {isMaxReached && (
           <Badge
             variant="secondary"
-            className="border-acai/30 bg-acai/10 text-acai"
+            className="border-acai/20 bg-acai/10 text-acai"
           >
             {selectedCount}/{MAX_ALLOWED}
           </Badge>
@@ -67,10 +67,10 @@ export function StepCreams() {
               className={cn(
                 'relative flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors',
                 selected
-                  ? 'border-acai bg-acai text-white glow-acai-sm'
+                  ? 'border-acai bg-acai text-white'
                   : disabled
-                    ? 'cursor-not-allowed border-border bg-surface-light opacity-50'
-                    : 'border-border bg-surface-light text-foreground/80 hover:border-acai/40 hover:bg-acai/5'
+                    ? 'cursor-not-allowed border-border bg-muted opacity-50'
+                    : 'border-border bg-card text-foreground/80 hover:border-acai/30 hover:bg-acai/5'
               )}
             >
               {selected && <Check className="size-3.5" />}
@@ -78,7 +78,7 @@ export function StepCreams() {
               {option.additional_cost > 0 && (
                 <span
                   className={cn(
-                    'font-mono text-xs',
+                    'text-xs',
                     selected ? 'text-white/80' : 'text-muted-foreground'
                   )}
                 >

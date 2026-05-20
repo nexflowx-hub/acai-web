@@ -44,11 +44,11 @@ export function CartDrawer() {
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent
           side="right"
-          className="flex flex-col bg-surface sm:max-w-md w-full border-l border-acai/20"
+          className="flex flex-col bg-card sm:max-w-md w-full border-l border-border/60"
         >
           {/* ── Header ─────────────────────────────────── */}
           <SheetHeader className="px-4 pt-4 pb-2">
-            <SheetTitle className="text-xl font-bold text-glow-acai text-acai">
+            <SheetTitle className="text-xl font-bold text-acai">
               🫐 O Seu Carrinho
             </SheetTitle>
             <SheetDescription className="sr-only">
@@ -61,7 +61,7 @@ export function CartDrawer() {
             )}
           </SheetHeader>
 
-          <Separator className="bg-acai/15" />
+          <Separator className="bg-border/60" />
 
           {/* ── Body ───────────────────────────────────── */}
           {isEmpty ? (
@@ -76,7 +76,7 @@ export function CartDrawer() {
               <Button
                 variant="outline"
                 onClick={() => setOpen(false)}
-                className="mt-2 border-acai/30 text-acai hover:bg-acai/10"
+                className="mt-2 border-acai/30 text-acai hover:bg-acai/5"
               >
                 Ver Menu
               </Button>
@@ -104,7 +104,7 @@ export function CartDrawer() {
                   return (
                     <div
                       key={item.cart_item_id}
-                      className="bg-surface-light rounded-lg p-3 neon-border"
+                      className="bg-muted/50 rounded-lg p-3 border border-border/40"
                     >
                       {/* Item top row: name + remove */}
                       <div className="flex items-start justify-between gap-2">
@@ -136,7 +136,7 @@ export function CartDrawer() {
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="size-7 rounded-md border border-acai/20 text-acai hover:bg-acai/10 hover:border-acai/40"
+                            className="size-7 rounded-md border border-acai/20 text-acai hover:bg-acai/5 hover:border-acai/40"
                             onClick={() =>
                               updateQuantity(item.cart_item_id, item.quantity - 1)
                             }
@@ -150,7 +150,7 @@ export function CartDrawer() {
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="size-7 rounded-md border border-acai/20 text-acai hover:bg-acai/10 hover:border-acai/40"
+                            className="size-7 rounded-md border border-acai/20 text-acai hover:bg-acai/5 hover:border-acai/40"
                             onClick={() =>
                               updateQuantity(item.cart_item_id, item.quantity + 1)
                             }
@@ -163,10 +163,10 @@ export function CartDrawer() {
                         {/* Price info */}
                         <div className="text-right">
                           <p className="text-xs text-muted-foreground">
-                            {formatPrice(unitPrice)} × {item.quantity}
+                            {formatPrice(unitPrice)} &times; {item.quantity}
                           </p>
-                          <p className="font-mono text-sm font-bold text-acai">
-                            €{formatPrice(item.total_price)}
+                          <p className="text-sm font-bold text-acai">
+                            &euro;{formatPrice(item.total_price)}
                           </p>
                         </div>
                       </div>
@@ -179,23 +179,23 @@ export function CartDrawer() {
 
           {/* ── Footer ───────────────────────────────── */}
           {!isEmpty && (
-            <SheetFooter className="border-t border-acai/15 bg-surface">
+            <SheetFooter className="border-t border-border/60 bg-card">
               {/* Subtotal */}
               <div className="flex items-center justify-between w-full py-2">
                 <span className="text-sm font-medium text-muted-foreground">
                   Subtotal
                 </span>
-                <span className="font-mono text-lg font-bold text-acai">
-                  €{formatPrice(totalPrice)}
+                <span className="text-lg font-bold text-acai">
+                  &euro;{formatPrice(totalPrice)}
                 </span>
               </div>
 
               {/* Checkout Button */}
               <Button
-                className="w-full bg-neon-mint text-surface font-bold hover:bg-neon-mint/90 glow-mint transition-shadow duration-300"
+                className="w-full bg-ocean text-white font-bold hover:bg-ocean/90 shadow-organic transition-shadow duration-300"
                 size="lg"
                 onClick={() => {
-                  // TODO: Navigate to checkout
+                  // TODO: Navigate to Atlas checkout
                   setOpen(false);
                 }}
               >

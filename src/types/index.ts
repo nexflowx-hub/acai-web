@@ -1,17 +1,21 @@
 // ============================================================
-// AÇAÍ CONCEPT — TypeScript Interfaces (Relational Schema)
+// AÇAÍ DA TERRA — TypeScript Interfaces
+// Das Florestas Brasileiras às Praias Portuguesas
 // ============================================================
 
-/** Core product in the catalog */
+/** Core product in the catalog (Atlas API compatible) */
 export interface Product {
   id: string;
   name: string;
+  slug?: string;
   description: string;
   base_price: number;
   category: "combos" | "custom" | "gelados" | "bebidas";
   image_url: string;
+  images?: string[];
   sku: string;
   is_customizable: boolean;
+  tags?: string[];
 }
 
 /** A group of modifiers tied to a product (e.g., "Tamanho", "Toppings") */

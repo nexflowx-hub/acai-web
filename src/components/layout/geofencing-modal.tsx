@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { Truck, Store, Clock } from 'lucide-react';
+import { Truck, Store, Clock, MapPin } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -41,9 +41,7 @@ export function GeofencingModal({ open, onOpenChange }: GeofencingModalProps) {
     verify,
   } = useLocationStore();
 
-  // Track whether the user has attempted verification during this session
   const [verificationAttempted, setVerificationAttempted] = useState(false);
-  // Track if the input has been modified since last verify
   const [isDirty, setIsDirty] = useState(false);
 
   const handlePostalCodeChange = useCallback(
@@ -88,7 +86,6 @@ export function GeofencingModal({ open, onOpenChange }: GeofencingModalProps) {
     }
   }, [canConfirm, onOpenChange]);
 
-  // Show verification failure only after explicit attempt
   const verificationFailed =
     verificationAttempted && !isVerified && postalCode.length > 0;
 
@@ -96,20 +93,19 @@ export function GeofencingModal({ open, onOpenChange }: GeofencingModalProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         className={
-          'glass-strong border-acai/20 max-h-[90vh] overflow-y-auto ' +
-          'bg-surface sm:max-w-md'
+          'max-h-[90vh] overflow-y-auto ' +
+          'sm:max-w-md'
         }
       >
         <DialogHeader>
           <DialogTitle
-            className={
-              'text-glow-acai text-center text-xl font-bold text-acai sm:text-left sm:text-2xl'
-            }
+            className="text-center text-xl font-bold text-foreground sm:text-left sm:text-2xl"
           >
+            <MapPin className="inline-block size-5 mr-2 text-acai" />
             Onde quer receber o seu Açaí?
           </DialogTitle>
           <DialogDescription className="text-center text-muted-foreground sm:text-left">
-            Introduza o seu código postal para verificar a disponibilidade.
+            Introduza o seu código postal para verificar a disponibilidade na sua zona.
           </DialogDescription>
         </DialogHeader>
 
@@ -131,11 +127,11 @@ export function GeofencingModal({ open, onOpenChange }: GeofencingModalProps) {
                   if (e.key === 'Enter') handleVerify();
                 }}
                 className={
-                  'font-mono text-base tracking-wider ' +
+                  'text-base tracking-wider ' +
                   (verificationFailed
-                    ? 'border-neon-pink focus-visible:border-neon-pink'
+                    ? 'border-coral focus-visible:border-coral'
                     : isVerified && !isDirty
-                      ? 'border-neon-mint focus-visible:border-neon-mint'
+                      ? 'border-forest focus-visible:border-forest'
                       : '')
                 }
                 maxLength={8}
@@ -144,7 +140,7 @@ export function GeofencingModal({ open, onOpenChange }: GeofencingModalProps) {
                 type="button"
                 onClick={handleVerify}
                 variant="outline"
-                className="shrink-0 border-acai/40 text-acai hover:bg-acai/10 hover:text-acai"
+                className="shrink-0 border-acai/30 text-acai hover:bg-acai/5 hover:text-acai"
               >
                 Verificar
               </Button>
@@ -152,14 +148,14 @@ export function GeofencingModal({ open, onOpenChange }: GeofencingModalProps) {
 
             {/* Verification feedback */}
             {isVerified && !isDirty && (
-              <p className="flex items-center gap-1.5 text-xs text-neon-mint">
-                <span className="inline-block size-1.5 rounded-full bg-neon-mint" />
+              <p className="flex items-center gap-1.5 text-xs text-forest">
+                <span className="inline-block size-1.5 rounded-full bg-forest" />
                 Código postal verificado — entregas disponíveis
               </p>
             )}
             {verificationFailed && (
-              <p className="flex items-center gap-1.5 text-xs text-neon-pink">
-                <span className="inline-block size-1.5 rounded-full bg-neon-pink" />
+              <p className="flex items-center gap-1.5 text-xs text-coral">
+                <span className="inline-block size-1.5 rounded-full bg-coral" />
                 Código postal inválido — mínimo 4 caracteres
               </p>
             )}
@@ -169,14 +165,14 @@ export function GeofencingModal({ open, onOpenChange }: GeofencingModalProps) {
           <div
             className={
               'flex items-center justify-between rounded-lg border border-border ' +
-              'bg-surface-light px-4 py-3'
+              'bg-muted/50 px-4 py-3'
             }
           >
             <div className="flex items-center gap-2">
               {mode === 'delivery' ? (
                 <Truck className="size-4 text-acai" />
               ) : (
-                <Store className="size-4 text-neon-mint" />
+                <Store className="size-4 text-ocean" />
               )}
               <span className="text-sm font-medium">
                 {mode === 'delivery'
@@ -209,7 +205,7 @@ export function GeofencingModal({ open, onOpenChange }: GeofencingModalProps) {
               >
                 <SelectTrigger
                   className={
-                    'w-full font-mono ' +
+                    'w-full ' +
                     (!isVerified || isDirty ? 'opacity-50' : '')
                   }
                 >
@@ -221,17 +217,16 @@ export function GeofencingModal({ open, onOpenChange }: GeofencingModalProps) {
                     }
                   />
                 </SelectTrigger>
-                <SelectContent className="border-acai/20 bg-surface-light">
+                <SelectContent>
                   {timeSlots.map((slot: TimeSlot) => (
                     <SelectItem
                       key={slot.id}
                       value={slot.id}
-                      className="font-mono focus:bg-acai/10 focus:text-acai"
                     >
                       <span className="flex items-center gap-2">
                         {slot.label}
                         {slot.estimated_minutes && (
-                          <span className="text-xs text-neon-mint">
+                          <span className="text-xs text-ocean">
                             ≈ {slot.estimated_minutes}
                           </span>
                         )}
@@ -257,8 +252,8 @@ export function GeofencingModal({ open, onOpenChange }: GeofencingModalProps) {
             className={
               'w-full py-3 text-base font-semibold transition-all ' +
               (canConfirm
-                ? 'bg-acai text-primary-foreground shadow-[0_0_20px_rgba(124,58,237,0.3)] hover:bg-acai/90'
-                : 'bg-surface-light text-muted-foreground')
+                ? 'bg-acai text-white hover:bg-acai/90 shadow-organic'
+                : 'bg-muted text-muted-foreground')
             }
           >
             Confirmar
